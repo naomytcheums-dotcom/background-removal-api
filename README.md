@@ -33,6 +33,13 @@ Returns `{"status": "ok"}`. Useful for uptime checks.
 
 Interactive Swagger UI — try the API directly from your browser.
 
+## Live demo
+
+- API: https://background-removal-api-dhml.onrender.com
+- Interactive docs: https://background-removal-api-dhml.onrender.com/docs
+
+`/api/health` and `/docs` are live and responsive. `/api/remove-background` itself is confirmed working correctly — verified locally with pixel-level checks (background alpha 0, subject alpha ~255) — but on the live Render free-tier instance the actual inference call currently gets killed by the platform's 512 MB RAM limit before it can respond. This is a hosting-tier constraint, not a code defect: the same code runs a full request successfully on any machine with more headroom. Upgrading the Render plan (more RAM) resolves it.
+
 ## Example
 
 ```bash
@@ -70,4 +77,4 @@ No frontend, no database, no LLM key — this is a pure backend API, deployable 
 
 ## Status
 
-This is an MVP built for portfolio purposes. `API_ACCESS_KEY` is optional; leave it empty for an open demo, or set it to require callers to authenticate. Uses the lightweight `u2netp` model for fast inference on free-tier hardware — image quality on complex edges (hair, fur, glass) is good but not pixel-perfect.
+This is an MVP built for portfolio purposes. `API_ACCESS_KEY` is optional; leave it empty for an open demo, or set it to require callers to authenticate. Uses the lightweight `u2netp` model for fast inference — image quality on complex edges (hair, fur, glass) is good but not pixel-perfect. As noted above, the hosted free-tier demo's RAM ceiling currently blocks the actual inference call in production; the code itself is verified correct locally.
